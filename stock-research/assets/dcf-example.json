@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-05",
+  "currency": "USD",
+  "amount_scale": 1000000,
+  "cash_flow_type": "FCFF",
+  "discount_rate": 0.10,
+  "discount_rate_basis": "SYNTHETIC A4: constant nominal USD WACC for illustration only",
+  "terminal_growth": 0.03,
+  "terminal_growth_basis": "SYNTHETIC A5: nominal perpetual growth for illustration only",
+  "terminal_cash_flow": 123.6,
+  "terminal_basis": "SYNTHETIC A3: next full year's normalized FCFF after reinvestment; illustration only",
+  "periods": [
+    {"start": "2026-11-05", "end": "2026-12-31", "cash_flow": 15, "basis": "SYNTHETIC A1: only remaining-period FCFF, excludes realized cash flow"},
+    {"start": "2026-12-31", "end": "2027-12-31", "cash_flow": 110, "basis": "SYNTHETIC A2: full-year FCFF"},
+    {"start": "2027-12-31", "end": "2028-12-31", "cash_flow": 120, "basis": "SYNTHETIC A3: full-year FCFF"}
+  ],
+  "bridge": [
+    {"label": "nonoperating cash", "value": 50, "basis": "SYNTHETIC E1: valuation-date excess cash"},
+    {"label": "debt", "value": -200, "basis": "SYNTHETIC E2: valuation-date debt claim"}
+  ],
+  "shares": {"count": 100000000, "basis": "SYNTHETIC E3: actual ordinary-equivalent shares; dilution included"},
+  "quote": {"currency": "USD", "fx_per_model_currency": 1, "ordinary_shares_per_quote_unit": 1, "basis": "SYNTHETIC E4: ordinary shares, same currency"},
+  "sensitivity": {"discount_rates": [0.09, 0.10, 0.11], "terminal_growth_rates": [0.02, 0.03, 0.04]}
+}
