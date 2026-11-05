@@ -1,0 +1,4 @@
+interface:
+  display_name: "股票研究"
+  short_description: "以可靠来源研究股票，整合财务、护城河、估值、风险与财报解读"
+  default_prompt: "使用 $stock-research 全面分析指定股票，核实最新披露和股价，给出有依据的估值区间、三种情景与投资论点。"
