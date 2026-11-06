@@ -1,0 +1,4 @@
+interface:
+  display_name: "微型 SaaS 机会侦察"
+  short_description: "搜索全球微型 SaaS，核验需求与商业证据，筛选适合个人开发者的英语市场机会"
+  default_prompt: "使用 $micro-saas-scout 寻找适合我开发的英语市场微型 SaaS 机会，实际搜索核验并保存报告。"

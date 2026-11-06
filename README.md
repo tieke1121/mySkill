@@ -1,4 +1,13 @@
-# mySkill · 股票研究
+# mySkill · 可执行研究技能
+
+| Skill | 用途 |
+| --- | --- |
+| [stock-research](stock-research/SKILL.md) | 股票基本面研究与可复算估值 |
+| [micro-saas-scout](micro-saas-scout/SKILL.md) | 发现并核验面向英语市场的微型 SaaS 创业机会 |
+
+两个 skill 可独立安装。以下先介绍股票研究，微型 SaaS 的安装与执行方式见文末。
+
+## 股票研究
 
 一个可复用的 `stock-research` skill。直接提供股票名称或代码，默认输出中文全面研究；也可以只研究财务、护城河、估值、风险、增长、机构逻辑、多空观点或最新财报。
 
@@ -77,3 +86,34 @@ python3 -m unittest discover -s tests -v
 验证范围：本次提供并运行数值与文件包测试；Antigravity 的客户端发现、触发及完整股票研究尚未实测。安装格式兼容、计算正确与研究结论可靠是三种不同的验证。
 
 更新时拉取仓库最新版本，比较本地修改后替换已安装的 `stock-research/`，再按上述方法重新加载。分析输出应保存至任务目录，不写回 skill 安装目录。
+
+## 微型 SaaS 机会侦察
+
+`micro-saas-scout` 实际调用宿主提供的搜索/浏览工具发现和核验产品，再使用 Python 3.9+ 标准库脚本校验数据、识别重复产品、比较历史并生成 Markdown 与 JSON。脚本本身不是独立网络爬虫；完整研究需要具备联网能力的 agent。
+
+将整个文件夹安装到 Codex 的个人 skills 目录：
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R micro-saas-scout "${CODEX_HOME:-$HOME/.codex}/skills/"
+```
+
+已有同名自定义版本时先比较差异，避免直接覆盖。使用示例：
+
+- `$micro-saas-scout 寻找适合个人开发者做的英语市场微型 SaaS`：默认初筛约 20–30 个候选，最多推荐 5 个。
+- `$micro-saas-scout 深挖 <产品名或官网>，重点分析首批客户、MVP 和验证步骤`。
+- `$micro-saas-scout 只看电商运营工具，排除依赖广告投放的机会`。
+- `$micro-saas-scout 用 2 个产品试跑，并明确证据缺口`：缩小范围并标记 smoke-test。
+
+默认资源为 1 人、每周 15–20 小时、4–6 周首个可收费版本、每月人民币 2,000 元验证预算；每次任务可覆盖。默认报告目录为 `~/micro-saas-research/runs/`，不自动联系客户、付费购买数据或创建定时任务。
+
+准备研究输入时读取 [数据契约与筛选规则](micro-saas-scout/references/evaluation.md)，联网研究参照 [搜索与核验流程](micro-saas-scout/references/discovery.md)。手动执行辅助脚本：
+
+```bash
+python3 micro-saas-scout/scripts/manage_results.py validate /absolute/path/input.json
+python3 micro-saas-scout/scripts/manage_results.py save /absolute/path/input.json \
+  --output /absolute/path/new-run-directory \
+  --history /absolute/path/previous-run/results.json
+```
+
+无历史时省略 `--history`。目标目录必须不存在，以保护旧快照。测试执行方式仍为 `python3 -m unittest discover -s tests -v`，覆盖证据引用、未知收入、重复身份、历史变化和安装后可执行性。结构测试不能代替研究质量验收；首次联网试跑的范围与结论在交付时单独说明。
